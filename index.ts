@@ -1,29 +1,23 @@
-import { FastifyPluginAsync } from "fastify";
-import { PrismaClient } from "@prisma/client";
-import fp from "fastify-plugin";
+import { FastifyPluginAsync } from 'fastify'
+import fp from 'fastify-plugin'
+import { PrismaClient } from '@prisma/client'
 
-declare module "fastify" {
+declare module 'fastify' {
   interface FastifyInstance {
-    prisma: PrismaClient;
+    prisma: PrismaClient
   }
 }
 
 const prismaPlugin: FastifyPluginAsync = async (fastify) => {
-  if (!PrismaClient) {
-    throw new Error(
-      "`PrismaClient` not found. Please ensure you have generated Prisma Client using `npx prisma generate`"
-    );
-  }
+	if (!fastify.hasDecorator('prisma')) {
+		fastify
+			.decorate('prisma', new PrismaClient())
+			.addHook('onClose', async (server) => {
+				await server.prisma.$disconnect()
+			})
+	} else {
+		throw new Error('The `prisma` decorator has already been registered.')
+	}
+}
 
-  if (!fastify.prisma) {
-    const prisma = new PrismaClient();
-    fastify.decorate("prisma", prisma);
-    fastify.addHook("onClose", async (server) => {
-      await server.prisma.$disconnect();
-    });
-  } else {
-    throw new Error("The `prisma` decorator has already been registered.");
-  }
-};
-
-export default fp(prismaPlugin);
+export default fp(prismaPlugin)

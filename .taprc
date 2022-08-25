@@ -5,4 +5,4 @@ coverage: false
 nyc-arg: [--exclude=out]
 check-coverage: false
 files:
-  - test/**/test.js
+  - test/*.ts

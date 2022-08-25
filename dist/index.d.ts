@@ -1,7 +1,7 @@
 /// <reference types="node" />
-import { FastifyPluginAsync } from "fastify";
-import { PrismaClient } from "@prisma/client";
-declare module "fastify" {
+import { FastifyPluginAsync } from 'fastify';
+import { PrismaClient } from '@prisma/client';
+declare module 'fastify' {
     interface FastifyInstance {
         prisma: PrismaClient;
     }
