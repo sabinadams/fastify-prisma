@@ -9,7 +9,7 @@
     "url": "git@github.com:sabinadams/fastify-prisma.git"
   },
   "files": [
-    "dist"
+    "dist/**"
   ],
   "prisma": {
     "seed": "tsnd test/prisma/seed.ts"
