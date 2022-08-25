@@ -4,10 +4,6 @@
   "description": "",
   "main": "index.js",
   "types": "index.d.ts",
-  "precommit": [
-    "lint",
-    "test"
-  ],
   "scripts": {
     "pretest": "prisma db push --schema=./test/prisma/schema.prisma",
     "test": "tap",
