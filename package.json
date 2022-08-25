@@ -12,7 +12,7 @@
   },
   "scripts": {
     "pretest": "npm run lint && npm run prisma:push",
-    "test": "npx tap --ts ./test/**/*.ts",
+    "test": "npx tap --ts ./test/*.ts",
     "lint": "eslint 'index.ts' 'test/**/*.ts'",
     "lint:fix": "eslint 'index.ts' 'test/**/*.ts' --fix",
     "prebuild": "npm run prisma:generate",
