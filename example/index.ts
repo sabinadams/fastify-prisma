@@ -1,13 +1,13 @@
 import Fastify from 'fastify'
-import prismaPlugin from '..'
+import prismaPlugin from '../dist'
 
 const fastify = Fastify()
 
 fastify.register(prismaPlugin)
 
 fastify.get('/', async () => {
-	const data = await fastify.prisma.user.findMany()
-	return { count: data }
+	const users = await fastify.prisma.user.findMany()
+	return { users }
 })
 
 fastify.listen({ port: 3000 }, (err, address) => {
