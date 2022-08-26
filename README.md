@@ -53,6 +53,7 @@ fastify.register(prismaPlugin, {
     db: {
       url: 'file:./dev.db'
     }
+  }
 })
 
 ```
