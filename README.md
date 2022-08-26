@@ -44,7 +44,7 @@ fastify.listen({ port: 3000 }, (err, address) => {
 })
 ```
 
-You can also provide an object that contains Prisma Client's constructor arguments. For example, if you would like to manually set the datasource:
+You can also provide an object that contains Prisma Client's [constructor arguments](https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#prismaclient). For example, if you would like to manually set the datasource:
 
 ```ts
 
