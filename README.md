@@ -35,15 +35,26 @@ fastify.register(prismaPlugin)
 
 fastify.get('/', async () => {
   // You will get nice intellisense here 👇🏻
-	const users = await fastify.prisma.user.findMany()
-	return { users }
+  const users = await fastify.prisma.user.findMany()
+  return { users }
 })
 
 fastify.listen({ port: 3000 }, (err, address) => {
-	console.info(`⚡️ Server running at ${address}`)
+  console.info(`⚡️ Server running at ${address}`)
 })
 ```
 
+You can also provide an object that contains Prisma Client's constructor arguments. For example, if you would like to manually set the datasource:
+
+```ts
+
+fastify.register(prismaPlugin, datasources: {
+  db: {
+    url: 'file:./dev.db'
+  }
+})
+
+```
 ## Caveats
 
 There are a few caveats with this plugin which, at the moment, have no workarounds I am aware of:
