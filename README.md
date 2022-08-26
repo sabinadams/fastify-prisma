@@ -48,10 +48,11 @@ You can also provide an object that contains Prisma Client's [constructor argume
 
 ```ts
 
-fastify.register(prismaPlugin, datasources: {
-  db: {
-    url: 'file:./dev.db'
-  }
+fastify.register(prismaPlugin, {
+  datasources: {
+    db: {
+      url: 'file:./dev.db'
+    }
 })
 
 ```
