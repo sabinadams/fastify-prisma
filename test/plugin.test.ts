@@ -17,6 +17,15 @@ const register = (t: Tap.Test, callback: HelperCallback) => {
 	fastify.ready((err) => callback(err, fastify))
 }
 
+const registerWithOptions = (t: Tap.Test, callback: HelperCallback) => {
+	const fastify = Fastify()
+	t.teardown(() => fastify.close())
+	fastify.register(prismaPlugin, {
+		log: [{ emit: 'event', level: 'query' }]
+	})
+	fastify.ready((err) => callback(err, fastify))
+}
+
 const registerTwice = (t: Tap.Test, callback: HelperCallback) => {
 	const fastify = Fastify()
 	t.teardown(() => fastify.close())
@@ -47,5 +56,21 @@ test('fastify.prisma should fail if attempting to register more than once', (t) 
 	registerTwice(t, (err: Error) => {
 		t.ok(err)
 		t.match(err.message, 'The `prisma` decorator has already been registered.')
+	})
+})
+
+test('fastify.prisma should accept Prisma Client configuration options and apply them', (t) => {
+	t.plan(1)
+	registerWithOptions(t, (err: Error, fastify: FastifyInstance) => {
+		let hit = false
+		// @ts-expect-error There are type issues when working with Fastify I can't get around yet
+		fastify.prisma.$on('query', () => {
+			hit = true
+		})
+		// Run a query and see if the logger event got hit
+		fastify.prisma.user.count().then(() => {
+			if (hit) t.pass()
+			else t.fail()
+		})
 	})
 })
