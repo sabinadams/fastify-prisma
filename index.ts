@@ -11,6 +11,8 @@ declare module 'fastify' {
 
 const prismaPlugin: FastifyPluginAsync<Omit<PrismaClientOptions, '__internal'>> = async (fastify, options) => {
 	if (!fastify.hasDecorator('prisma')) {
+		const prisma = new PrismaClient(options)
+		await prisma.$connect()
 		fastify
 			.decorate('prisma', new PrismaClient(options))
 			.addHook('onClose', async (server) => {
