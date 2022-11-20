@@ -40,7 +40,7 @@
   "author": "Sabin Adams",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "18.7.13",
+    "@types/node": "18.11.9",
     "@types/tap": "15.0.7",
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "eslint": "8.23.0",
