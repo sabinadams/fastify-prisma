@@ -45,7 +45,7 @@
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "eslint": "8.23.0",
     "eslint-config-standard-with-typescript": "22.0.0",
-    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-import": "2.27.5",
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-promise": "6.0.1",
     "fastify": "4.5.3",
